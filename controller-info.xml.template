@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<controller-info>
+    <!-- AppDynamics Controller Configuration Template -->
+    
+    <!-- Controller connection details -->
+    <controller-host>your-controller-host</controller-host>
+    <controller-port>443</controller-port>
+    <controller-ssl-enabled>true</controller-ssl-enabled>
+    <enable-orchestration>false</enable-orchestration>
+    
+    <!-- Application details -->
+    <application-name>YourApplicationName</application-name>
+    <tier-name>YourTierName</tier-name>
+    <node-name>YourNodeName</node-name>
+    
+    <!-- Account information -->
+    <account-name>your-account-name</account-name>
+    <account-access-key>your-access-key</account-access-key>
+    
+    <!-- JMX Configuration -->
+    <jmx-config-file>custom-jmx-config.xml</jmx-config-file>
+    
+    <!-- Optional: Additional JMX settings -->
+    <jmx-enabled>true</jmx-enabled>
+    <jmx-port>8999</jmx-port>
+    
+    <!-- Logging configuration -->
+    <agent-log-level>INFO</agent-log-level>
+    
+    <!-- Optional: Metric collection settings -->
+    <metric-limit>10000</metric-limit>
+    
+    <!-- Optional: Custom properties -->
+    <property name="custom.property.example">value</property>
+</controller-info>

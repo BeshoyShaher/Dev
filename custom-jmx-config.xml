@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmx-config>
+    <!-- AppDynamics JMX Configuration for ESP Pipeline Metrics -->
+    <!-- Based on Prometheus JMX configuration patterns -->
+    
+    <!-- Clinical Results V2 Space Metrics -->
+    <jmx>
+        <object-name>com.orchestral.esp.pipeline:space=*Clinical.ResultsV2*,name=events.per.message</object-name>
+        <metric>
+            <name>ESP|Pipeline|Clinical ResultsV2|Events Per Message</name>
+            <value>Value</value>
+        </metric>
+    </jmx>
+    
+    <jmx>
+        <object-name>com.orchestral.esp.pipeline:space=*Clinical.ResultsV2*,name=event.size</object-name>
+        <metric>
+            <name>ESP|Pipeline|Clinical ResultsV2|Event Size</name>
+            <value>Value</value>
+        </metric>
+    </jmx>
+    
+    <jmx>
+        <object-name>com.orchestral.esp.pipeline:space=*Clinical.ResultsV2*,name=events.per.sequence</object-name>
+        <metric>
+            <name>ESP|Pipeline|Clinical ResultsV2|Events Per Sequence</name>
+            <value>Value</value>
+        </metric>
+    </jmx>
+    
+    <jmx>
+        <object-name>com.orchestral.esp.pipeline:space=*Clinical.ResultsV2*,name=completed</object-name>
+        <metric>
+            <name>ESP|Pipeline|Clinical ResultsV2|Completed</name>
+            <value>Value</value>
+        </metric>
+    </jmx>
+    
+    <jmx>
+        <object-name>com.orchestral.esp.pipeline:space=*Clinical.ResultsV2*,name=remaining</object-name>
+        <metric>
+            <name>ESP|Pipeline|Clinical ResultsV2|Remaining</name>
+            <value>Value</value>
+        </metric>
+    </jmx>
+    
+    <!-- Log Stage Event Chain Metrics -->
+    <jmx>
+        <object-name>com.orchestral.esp.pipeline:stage=*log*,chain=*event*,name=events.per.message</object-name>
+        <metric>
+            <name>ESP|Pipeline|Log Stage|Event Chain|Events Per Message Max</name>
+            <value>Max</value>
+        </metric>
+    </jmx>
+    
+    <jmx>
+        <object-name>com.orchestral.esp.pipeline:stage=*log*,chain=*event*,name=event.size</object-name>
+        <metric>
+            <name>ESP|Pipeline|Log Stage|Event Chain|Event Size Max</name>
+            <value>Max</value>
+        </metric>
+    </jmx>
+    
+    <jmx>
+        <object-name>com.orchestral.esp.pipeline:stage=*log*,chain=*event*,name=issue</object-name>
+        <metric>
+            <name>ESP|Pipeline|Log Stage|Event Chain|Issue Count</name>
+            <value>Count</value>
+        </metric>
+    </jmx>
+    
+    <jmx>
+        <object-name>com.orchestral.esp.pipeline:stage=*log*,chain=*event*,name=remaining</object-name>
+        <metric>
+            <name>ESP|Pipeline|Log Stage|Event Chain|Remaining</name>
+            <value>Value</value>
+        </metric>
+    </jmx>
+    
+    <!-- Sequence Stage Metrics -->
+    <jmx>
+        <object-name>com.orchestral.esp.pipeline:stage=*sequence*,name=events.per.sequence</object-name>
+        <metric>
+            <name>ESP|Pipeline|Sequence Stage|Events Per Sequence</name>
+            <value>Value</value>
+        </metric>
+    </jmx>
+    
+    <jmx>
+        <object-name>com.orchestral.esp.pipeline:stage=*sequence*,name=remaining</object-name>
+        <metric>
+            <name>ESP|Pipeline|Sequence Stage|Remaining</name>
+            <value>Value</value>
+        </metric>
+    </jmx>
+    
+    <jmx>
+        <object-name>com.orchestral.esp.pipeline:stage=*sequence*,name=work.avoidance</object-name>
+        <metric>
+            <name>ESP|Pipeline|Sequence Stage|Work Avoidance Count</name>
+            <value>Count</value>
+        </metric>
+    </jmx>
+    
+    <jmx>
+        <object-name>com.orchestral.esp.pipeline:stage=*sequence*,name=issue</object-name>
+        <metric>
+            <name>ESP|Pipeline|Sequence Stage|Issue Count</name>
+            <value>Count</value>
+        </metric>
+    </jmx>
+    
+    <jmx>
+        <object-name>com.orchestral.esp.pipeline:stage=*sequence*,name=completed</object-name>
+        <metric>
+            <name>ESP|Pipeline|Sequence Stage|Completed Count</name>
+            <value>Count</value>
+        </metric>
+    </jmx>
+    
+    <jmx>
+        <object-name>com.orchestral.esp.pipeline:stage=*sequence*,name=failed</object-name>
+        <metric>
+            <name>ESP|Pipeline|Sequence Stage|Failed Count</name>
+            <value>Count</value>
+        </metric>
+    </jmx>
+    
+    <jmx>
+        <object-name>com.orchestral.esp.pipeline:stage=*sequence*,name=events.read</object-name>
+        <metric>
+            <name>ESP|Pipeline|Sequence Stage|Events Read Count</name>
+            <value>Count</value>
+        </metric>
+    </jmx>
+</jmx-config>

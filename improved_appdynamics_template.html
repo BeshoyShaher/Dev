@@ -1,0 +1,272 @@
+## AppDynamics Email Template - Enhanced Version
+
+## Improved severity handling with better logic
+#if(${latestEvent.severity} == 'ERROR')
+    #set($severity_Text = 'Critical')
+    #set($severity_color = '#dc2626')
+    #set($severity_class = 'critical')
+#elseif(${latestEvent.severity} == 'WARN')
+    #set($severity_Text = 'Warning')
+    #set($severity_color = '#d97706')
+    #set($severity_class = 'warning')
+#else
+    #set($severity_Text = 'Resolved')
+    #set($severity_color = '#16a34a')
+    #set($severity_class = 'resolved')
+#end
+
+## Enhanced null checking for optional fields
+#set($tier_Name = 'N/A')
+#if(${latestEvent.tier} && ${latestEvent.tier.name} && ${latestEvent.tier.name} != '')
+    #set($tier_Name = ${latestEvent.tier.name})
+#end
+
+#set($node_Name = 'N/A')
+#if(${latestEvent.node} && ${latestEvent.node.name} && ${latestEvent.node.name} != '')
+    #set($node_Name = ${latestEvent.node.name})
+#end
+
+#set($HR_Name = 'N/A')
+#if(${latestEvent.incident} && ${latestEvent.incident.name} && ${latestEvent.incident.name} != '')
+    #set($HR_Name = ${latestEvent.incident.name})
+#elseif(${latestEvent.healthRule} && ${latestEvent.healthRule.name} && ${latestEvent.healthRule.name} != '')
+    #set($HR_Name = ${latestEvent.healthRule.name})
+#end
+
+#set($event_summary = '')
+#if(${latestEvent.summary} && ${latestEvent.summary} != '')
+    #set($event_summary = ${latestEvent.summary})
+#else
+    #set($event_summary = ${latestEvent.displayName})
+#end
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AppDynamics Alert - ${latestEvent.application.name}</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .logo {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        .alert-banner {
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            border-bottom: 3px solid;
+        }
+        .severity-critical {
+            background-color: #fee2e2;
+            color: #dc2626;
+            border-color: #dc2626;
+        }
+        .severity-warning {
+            background-color: #fef3c7;
+            color: #d97706;
+            border-color: #d97706;
+        }
+        .severity-resolved {
+            background-color: #dcfce7;
+            color: #16a34a;
+            border-color: #16a34a;
+        }
+        .content {
+            padding: 30px;
+        }
+        .alert-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .alert-table th,
+        .alert-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .alert-table th {
+            background-color: #f9fafb;
+            font-weight: 600;
+            color: #374151;
+            width: 30%;
+        }
+        .alert-table td {
+            color: #1f2937;
+        }
+        .alert-table tr:last-child td {
+            border-bottom: none;
+        }
+        .alert-table a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .alert-table a:hover {
+            text-decoration: underline;
+        }
+        .severity-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .badge-critical {
+            background-color: #dc2626;
+            color: white;
+        }
+        .badge-warning {
+            background-color: #d97706;
+            color: white;
+        }
+        .badge-resolved {
+            background-color: #16a34a;
+            color: white;
+        }
+        .footer {
+            background-color: #f9fafb;
+            padding: 20px;
+            text-align: center;
+            color: #6b7280;
+            border-top: 1px solid #e5e7eb;
+        }
+        .timestamp {
+            font-family: 'Courier New', monospace;
+            background-color: #f3f4f6;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+        .app-name {
+            font-weight: bold;
+            color: #1f2937;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #3b82f6;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .cta-button:hover {
+            background-color: #2563eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="data:image/png;base64,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" alt="AppDynamics Logo" class="logo">
+            <h1>Application Performance Alert</h1>
+        </div>
+        
+        <div class="alert-banner severity-${severity_class}">
+            🚨 ${severity_Text} Alert - ${latestEvent.application.name}
+        </div>
+
+        <div class="content">
+            <h2>Alert Details</h2>
+            <table class="alert-table">
+                <tbody>
+                    <tr>
+                        <th>Severity</th>
+                        <td>
+                            <span class="severity-badge badge-${severity_class}">
+                                ${severity_Text}
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Application</th>
+                        <td class="app-name">${latestEvent.application.name}</td>
+                    </tr>
+                    <tr>
+                        <th>Event Type</th>
+                        <td>
+                            #if(${latestEvent.deepLink})
+                                <a href="${latestEvent.deepLink}" target="_blank">${latestEvent.displayName}</a>
+                            #else
+                                ${latestEvent.displayName}
+                            #end
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Health Rule</th>
+                        <td>${HR_Name}</td>
+                    </tr>
+                    #if($tier_Name != 'N/A')
+                    <tr>
+                        <th>Tier</th>
+                        <td>${tier_Name}</td>
+                    </tr>
+                    #end
+                    #if($node_Name != 'N/A')
+                    <tr>
+                        <th>Node</th>
+                        <td>${node_Name}</td>
+                    </tr>
+                    #end
+                    <tr>
+                        <th>Event Time</th>
+                        <td class="timestamp">${latestEvent.eventTime}</td>
+                    </tr>
+                    #if(${event_summary} && ${event_summary} != ${latestEvent.displayName})
+                    <tr>
+                        <th>Summary</th>
+                        <td>${event_summary}</td>
+                    </tr>
+                    #end
+                </tbody>
+            </table>
+
+            #if(${latestEvent.deepLink})
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="${latestEvent.deepLink}" target="_blank" class="cta-button">
+                    🔍 View in AppDynamics Controller
+                </a>
+            </div>
+            #end
+        </div>
+
+        <div class="footer">
+            <p><strong>AppDynamics Monitoring Team</strong></p>
+            <p>This is an automated alert from your AppDynamics monitoring system.</p>
+            <p style="font-size: 12px; color: #9ca3af; margin-top: 15px;">
+                Alert generated at: ${latestEvent.eventTime}<br>
+                Application: ${latestEvent.application.name}
+            </p>
+        </div>
+    </div>
+</body>
+</html>
